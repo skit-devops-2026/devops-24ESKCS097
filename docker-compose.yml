@@ -1,0 +1,5 @@
+services:
+  releaf-book:
+    build: .
+    ports:
+      - "8081:80"
