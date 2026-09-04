@@ -1,36 +1,25 @@
-# <Project Name>
-
-> Replace every angle-bracket placeholder below. The hygiene check in CI will
-> fail until you do.
+# Releaf-Book
 
 ## Author
 
 | Roll No. | Name | GitHub username |
 |---|---|---|
-| <roll> | <name> | <username> |
+| 24ESKCS097 | CHIRAG DHARMDASANI | chirag070707 |
 
 ## About
 
-<Two or three sentences on what this application does.>
+Releaf-Book is a web-based platform for buying and selling pre-owned books.
+Users can browse available books, view listings, manage their wishlist, and
+use buying and selling related features through the web interface.
 
 ## Tech stack
 
-- Frontend: <e.g. React>
-- Backend: <e.g. Node.js / Express>
-- Database: <e.g. PostgreSQL>
+- Frontend: HTML, CSS, JavaScript
+- Backend: None (static web application)
+- Database: None
 
 ## Running locally
 
 ```bash
 make install
 make run
-```
-
-## Live URL
-
-<Add once M5 is done. Until then, leave as is.>
-
-## Health endpoint
-
-`GET /health` returns the running commit SHA. See `Makefile` and the milestone
-sheet for why this is required.

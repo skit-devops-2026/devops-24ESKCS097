@@ -11,13 +11,14 @@
 .PHONY: install test build run docker-build docker-up
 
 install:
-	@echo "TODO: install dependencies" && exit 1
+	@node --version
+	@echo "No external dependencies required for this static application."
 
 test:
-	@echo "TODO: run the test suite" && exit 1
+	node --test tests/app.test.mjs
 
 build:
-	@echo "TODO: build the project" && exit 1
+	node scripts/build-check.mjs
 
 run:
 	@echo "TODO: start the app locally" && exit 1
