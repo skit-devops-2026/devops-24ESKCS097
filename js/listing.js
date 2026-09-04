@@ -1,3 +1,11 @@
+// Clear temporary listings when the page is refreshed
+const navigation = performance.getEntriesByType("navigation")[0];
+
+if (navigation && navigation.type === "reload") {
+    sessionStorage.removeItem("releafBooks");
+    sessionStorage.removeItem("editingBookIndex");
+}
+
 // ================= GET FORM =================
 
 const sellForm =
@@ -46,7 +54,7 @@ const additionalPreview =
 // ================= EDIT MODE =================
 
 const editingBookIndex =
-    localStorage.getItem("editingBookIndex");
+    sessionStorage.getItem("editingBookIndex");
 
 let editingBook = null;
 
@@ -55,7 +63,7 @@ if (editingBookIndex !== null) {
 
     const books =
         JSON.parse(
-            localStorage.getItem("releafBooks")
+            sessionStorage.getItem("releafBooks")
         ) || [];
 
 
@@ -527,7 +535,7 @@ function saveBook(
 
     const books =
         JSON.parse(
-            localStorage.getItem("releafBooks")
+            sessionStorage.getItem("releafBooks")
         ) || [];
 
 
@@ -630,7 +638,7 @@ function saveBook(
         ] = newBook;
 
 
-        localStorage.removeItem(
+        sessionStorage.removeItem(
             "editingBookIndex"
         );
 
@@ -647,7 +655,7 @@ function saveBook(
 
     // ================= SAVE =================
 
-    localStorage.setItem(
+    sessionStorage.setItem(
         "releafBooks",
         JSON.stringify(books)
     );
