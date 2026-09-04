@@ -75,3 +75,35 @@ test("all application pages have basic HTML structure", () => {
     assert.match(html, /<title/i, `${page} is missing title element`);
   }
 });
+
+test("all local HTML asset references point to existing files", () => {
+  const assetPattern = /(?:href|src)=["']([^"']+)["']/gi;
+
+  for (const page of requiredPages) {
+    const html = fs.readFileSync(path.join(root, page), "utf8");
+    let match;
+
+    while ((match = assetPattern.exec(html)) !== null) {
+      const reference = match[1];
+
+      // Ignore external URLs, anchors, data URLs, and JavaScript URLs.
+      if (
+        reference.startsWith("http://") ||
+        reference.startsWith("https://") ||
+        reference.startsWith("#") ||
+        reference.startsWith("data:") ||
+        reference.startsWith("javascript:")
+      ) {
+        continue;
+      }
+
+      const cleanReference = reference.split("?")[0].split("#")[0];
+      const referencedPath = path.join(root, cleanReference);
+
+      assert.ok(
+        fs.existsSync(referencedPath),
+        `${page} references missing asset: ${reference}`
+      );
+    }
+  }
+});

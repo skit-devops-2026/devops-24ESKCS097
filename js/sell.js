@@ -1,3 +1,11 @@
+// Clear temporary listings when the page is refreshed
+const navigation = performance.getEntriesByType("navigation")[0];
+
+if (navigation && navigation.type === "reload") {
+    sessionStorage.removeItem("releafBooks");
+    sessionStorage.removeItem("editingBookIndex");
+}
+
 // ================= GET LISTINGS =================
 
 const listingsContainer =
@@ -10,7 +18,7 @@ function displayBooks() {
 
     const books =
         JSON.parse(
-            localStorage.getItem("releafBooks")
+            sessionStorage.getItem("releafBooks")
         ) || [];
 
 
@@ -303,7 +311,7 @@ function displayBooks() {
 
                     const books =
                         JSON.parse(
-                            localStorage.getItem(
+                            sessionStorage.getItem(
                                 "releafBooks"
                             )
                         ) || [];
@@ -356,7 +364,7 @@ function displayBooks() {
                     );
 
 
-                    localStorage.setItem(
+                    sessionStorage.setItem(
                         "releafBooks",
                         JSON.stringify(books)
                     );
@@ -392,7 +400,7 @@ function displayBooks() {
                         );
 
 
-                    localStorage.setItem(
+                    sessionStorage.setItem(
                         "editingBookIndex",
                         index
                     );
@@ -429,7 +437,7 @@ function displayBooks() {
 
                 const books =
                     JSON.parse(
-                        localStorage.getItem(
+                        sessionStorage.getItem(
                             "releafBooks"
                         )
                     ) || [];
@@ -450,7 +458,7 @@ function displayBooks() {
 
                 // Save updated books
 
-                localStorage.setItem(
+                sessionStorage.setItem(
                     "releafBooks",
                     JSON.stringify(books)
                 );
@@ -532,7 +540,7 @@ if (
 
             const books =
                 JSON.parse(
-                    localStorage.getItem(
+                    sessionStorage.getItem(
                         "releafBooks"
                     )
                 ) || [];
