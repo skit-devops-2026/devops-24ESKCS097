@@ -63,3 +63,15 @@ test("HTML pages contain no obvious placeholder markers", () => {
     );
   }
 });
+
+test("all application pages have basic HTML structure", () => {
+  for (const page of requiredPages) {
+    const html = fs.readFileSync(path.join(root, page), "utf8");
+
+    assert.match(html, /<!DOCTYPE html>/i, `${page} is missing DOCTYPE`);
+    assert.match(html, /<html/i, `${page} is missing html element`);
+    assert.match(html, /<head/i, `${page} is missing head element`);
+    assert.match(html, /<body/i, `${page} is missing body element`);
+    assert.match(html, /<title/i, `${page} is missing title element`);
+  }
+});
