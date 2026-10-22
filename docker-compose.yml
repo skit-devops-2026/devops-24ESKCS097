@@ -1,5 +1,39 @@
+volumes:
+  grafana-data:
+
+
 services:
   releaf-book:
     build: .
     ports:
       - "8081:80"
+
+  nginx-exporter:
+    image: nginx/nginx-prometheus-exporter:1.4.2
+    command:
+      - --nginx.scrape-uri=http://releaf-book:80/stub_status
+    depends_on:
+      - releaf-book
+    ports:
+      - "9113:9113"
+
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+      - nginx-exporter
+
+
+  grafana:
+    image: grafana/grafana:12.1.0
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
+
+
