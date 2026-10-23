@@ -8,7 +8,7 @@
 
 ## Live URL
 
-**Live Website:** https://devops-24eskcs097.onrender.com
+**Live URL:** https://devops-24eskcs097.onrender.com
 
 ## Project Links
 
