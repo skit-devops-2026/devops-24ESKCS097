@@ -1,0 +1,23 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: releaf-book
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: releaf-book
+  template:
+    metadata:
+      labels:
+        app: releaf-book
+    spec:
+      imagePullSecrets:
+        - name: ghcr-secret
+      containers:
+        - name: releaf-book
+          image: ghcr.io/skit-devops-2026/devops-24eskcs097:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
